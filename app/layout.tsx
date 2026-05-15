@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+// 1. TAMBAHKAN IMPORT INI
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { Navbar } from "@/components/ui/Navbar";
 import "./globals.css";
@@ -32,6 +34,9 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-black text-white">
         <Navbar />
         {children}
+        
+        {/* 2. TAMBAHKAN KOMPONEN INI DI SINI */}
+        <SpeedInsights />
       </body>
     </html>
   );
