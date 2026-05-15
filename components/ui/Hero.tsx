@@ -21,7 +21,7 @@ const STATS = [
   },
   {
     icon: Briefcase,
-    value: "5+",
+    value: "2+",
     label: "Years Experience",
   },
   {
