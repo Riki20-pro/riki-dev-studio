@@ -2,7 +2,9 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Github, Music, Mail, ArrowUp } from "lucide-react";
+// Kita gunakan GitBranch sebagai pengganti ikon Github yang error terus
+// Dan Music untuk TikTok, Mail untuk Email, serta ArrowUp
+import { GitBranch, Music, Mail, ArrowUp } from "lucide-react"; 
 import { cn } from "@/lib/utils";
 
 const FOOTER_LINKS = [
@@ -13,7 +15,8 @@ const FOOTER_LINKS = [
 ];
 
 const SOCIALS = [
-  { icon: Github, href: "https://github.com/Riki20-pro", label: "GitHub" },
+  // Ganti Github menjadi GitBranch di sini juga
+  { icon: GitBranch, href: "https://github.com/Riki20-pro", label: "GitHub" }, 
   { icon: Music, href: "https://www.tiktok.com/@rikiii_20", label: "TikTok" },
   { icon: Mail, href: "mailto:rikisiahaan14@gmail.com", label: "Email" },
 ];
@@ -34,10 +37,10 @@ export function Footer() {
           {/* Brand Section */}
           <div className="flex flex-col items-center md:items-start">
             <h3 className="text-xl font-bold tracking-tighter text-white">
-              RIKI<span className="text-zinc-500">.STUDIO</span>
+              RIKI  DEV <span className="text-zinc-500"> STUDIO</span>
             </h3>
             <p className="mt-4 max-w-xs text-center text-sm leading-relaxed text-zinc-500 md:text-left">
-              Membangun solusi digital yang scalable dengan fokus pada performa dan pengalaman pengguna yang andal[cite: 4, 39, 80].
+              Membangun solusi digital yang scalable dengan fokus pada performa dan pengalaman pengguna yang andal[cite: 4, 30].
             </p>
           </div>
 
@@ -79,7 +82,7 @@ export function Footer() {
 
         <div className="mt-16 flex flex-col items-center justify-between border-t border-white/[0.05] pt-8 sm:flex-row">
           <p className="text-xs text-zinc-600">
-            © {new Date().getFullYear()} Riki Studio. All rights reserved. 
+            © {new Date().getFullYear()} Riki Studio. Built with Next.js & Tailwind CSS[cite: 30].
           </p>
           
           <button
