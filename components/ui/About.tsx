@@ -112,44 +112,46 @@ function ProfileAvatar() {
 }
 
 function ProfileCard() {
-  return (
-    <motion.div
-      variants={itemVariants}
-      className={cn(
-        "relative overflow-hidden rounded-2xl border border-white/[0.08]",
-        "bg-white/[0.03] p-6 backdrop-blur-sm sm:p-8"
-      )}
-    >
-      <div className="pointer-events-none absolute -right-8 -top-8 size-32 rounded-full bg-violet-600/10 blur-2xl" />
-
-      <div className="relative flex flex-col items-center text-center sm:items-start sm:text-left">
-        <ProfileAvatar />
-
-        <h3 className="mt-5 text-xl font-semibold tracking-tight text-white">
-          Riki
-        </h3>
-        <p className="mt-1 text-sm text-zinc-400">
-          Frontend & Full-Stack Developer
-        </p>
-
-        <div className="mt-4 flex items-center gap-1.5 text-sm text-zinc-500">
-          <MapPin className="size-3.5 shrink-0" />
-          <span>Indonesia · Remote</span>
-        </div>
-
-        <div className="mt-6 w-full border-t border-white/[0.06] pt-6">
-          <p className="text-xs font-medium uppercase tracking-wider text-zinc-500">
-            Focus
+    return (
+      <motion.div
+        variants={itemVariants}
+        className={cn(
+          "relative overflow-hidden rounded-2xl border border-white/[0.08]",
+          "bg-white/[0.03] p-6 backdrop-blur-sm sm:p-8",
+          "flex flex-col items-center justify-center" // Tambahkan ini agar box panjangnya jadi flex center
+        )}
+      >
+        {/* Efek cahaya di pojok */}
+        <div className="pointer-events-none absolute -right-8 -top-8 size-32 rounded-full bg-violet-600/10 blur-2xl" />
+  
+        {/* Bagian konten: Semua diatur ke items-center dan text-center */}
+        <div className="relative flex flex-col items-center text-center w-full">
+          <ProfileAvatar />
+  
+          <h3 className="mt-5 text-xl font-semibold tracking-tight text-white">
+            Riki
+          </h3>
+          <p className="mt-1 text-sm text-zinc-400">
+            Frontend & Full-Stack Developer
           </p>
-          <p className="mt-2 text-sm leading-relaxed text-zinc-400">
-            Website modern · Dashboard management · POS system · Full-stack
-            development
-          </p>
+  
+          <div className="mt-4 flex items-center justify-center gap-1.5 text-sm text-zinc-500">
+            <MapPin className="size-3.5 shrink-0" />
+            <span>Indonesia · Remote</span>
+          </div>
+  
+          <div className="mt-6 w-full border-t border-white/[0.06] pt-6 flex flex-col items-center">
+            <p className="text-xs font-medium uppercase tracking-wider text-zinc-500">
+              Focus
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-zinc-400 max-w-[250px]">
+              Website modern · Dashboard management · POS system · Full-stack development
+            </p>
+          </div>
         </div>
-      </div>
-    </motion.div>
-  );
-}
+      </motion.div>
+    );
+  }
 
 function AvailabilityTags() {
   return (
