@@ -16,7 +16,7 @@ import { cn } from "@/lib/utils";
 const STATS = [
   {
     icon: Code2,
-    value: "50+",
+    value: "21+",
     label: "Projects Delivered",
   },
   {
