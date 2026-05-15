@@ -7,10 +7,10 @@ const Experience = () => {
       period: "2025 - 2026",
       role: "Full Stack Developer",
       description: [
-        "Mengembangkan Sistem TFlow (PT. MAR), sebuah sistem informasi berbasis web untuk pengelolaan bisnis[cite: 17, 58, 91].",
-        "Membangun aplikasi Web POS (Point of Sales) Kasir dan sistem E-commerce Toko Online tingkat lanjut[cite: 17, 60, 93].",
-        "Menyusun website profil perusahaan (Company Profile) yang responsif[cite: 19, 61, 93].",
-        "Optimasi performa website dan penerapan dasar-dasar Technical SEO[cite: 81, 100]."
+        "Mengembangkan Sistem TFlow (PT. MAR), sebuah sistem informasi berbasis web untuk pengelolaan bisnis.",
+        "Membangun aplikasi Web POS (Point of Sales) Kasir dan sistem E-commerce Toko Online tingkat lanjut.",
+        "Menyusun website profil perusahaan (Company Profile) yang responsif.",
+        "Optimasi performa website dan penerapan dasar-dasar Technical SEO."
       ]
     },
     {
@@ -18,9 +18,9 @@ const Experience = () => {
       period: "2022 - 2025",
       role: "Crew Restaurant",
       description: [
-        "Mengelola transaksi kasir dan layanan drive-thru dengan tingkat akurasi tinggi[cite: 12, 52, 87].",
-        "Menangani sistem pesanan online (GoFood, GrabFood, ShopeeFood) secara efisien[cite: 12, 53, 87].",
-        "Bekerja sama dalam tim operasional dengan standar pelayanan internasional yang ketat[cite: 13, 55, 88]."
+        "Mengelola transaksi kasir dan layanan drive-thru dengan tingkat akurasi tinggi.",
+        "Menangani sistem pesanan online (GoFood, GrabFood, ShopeeFood) secara efisien.",
+        "Bekerja sama dalam tim operasional dengan standar pelayanan internasional yang ketat."
       ]
     },
     {
@@ -28,10 +28,10 @@ const Experience = () => {
       period: "2019 - 2022",
       role: "E-commerce Operations & Marketing",
       description: [
-        "Mengelola operasional toko online dan menangani komplain pelanggan secara profesional[cite: 7, 45, 84].",
-        "Mengembangkan strategi branding produk di platform e-commerce dan media sosial[cite: 8, 46, 84].",
-        "Membuat konten kreatif untuk Instagram & Facebook guna meningkatkan interaksi (engagement)[cite: 9, 49, 85].",
-        "Menyusun laporan penjualan bulanan untuk bahan evaluasi bisnis manajemen[cite: 10, 50, 85]."
+        "Mengelola operasional toko online dan menangani komplain pelanggan secara profesional.",
+        "Mengembangkan strategi branding produk di platform e-commerce dan media sosial.",
+        "Membuat konten kreatif untuk Instagram & Facebook guna meningkatkan interaksi (engagement).",
+        "Menyusun laporan penjualan bulanan untuk bahan evaluasi bisnis manajemen."
       ]
     }
   ];

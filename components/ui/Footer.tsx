@@ -25,32 +25,43 @@ export function Footer() {
 
   return (
     <footer className="relative mt-20 overflow-hidden border-t border-white/[0.05] bg-black py-12 text-zinc-400">
-      <div className="pointer-events-none absolute -bottom-24 left-1/2 size-[400px] -translate-x-1/2 rounded-full bg-violet-600/5 blur-[100px]" />
+      {/* Background Glow - Dibuat lebih halus */}
+      <div className="pointer-events-none absolute -bottom-24 left-1/2 size-[400px] -translate-x-1/2 rounded-full bg-violet-600/[0.03] blur-[100px]" />
 
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-8">
-          <div className="flex flex-col items-center md:items-start">
+      <div className="relative mx-auto max-w-6xl px-6 lg:px-8">
+        {/* Main Grid: 3 Col di Desktop, Stack di Mobile */}
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-3 md:items-start">
+          
+          {/* 1. Brand Section - Tetap di kiri pada desktop */}
+        <div className="flex flex-col items-center md:items-start text-center md:text-left">
             <h3 className="text-xl font-bold tracking-tighter text-white">
-              RIKI DEV <span className="text-zinc-500">STUDIO</span>
+            RIKI<span className="text-zinc-500"> DEV STUDIO</span>
             </h3>
-            <p className="mt-4 max-w-xs text-center text-sm leading-relaxed md:text-left">
-              Membangun solusi digital yang fokus pada performa dan pengalaman pengguna yang andal.
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-zinc-500">
+                Membangun solusi digital yang fokus pada performa dan pengalaman pengguna yang andal.
             </p>
-          </div>
+        </div>
 
-          <div className="flex flex-col items-center">
-            <h4 className="text-sm font-semibold uppercase tracking-widest text-white">Navigasi</h4>
-            <nav className="mt-6 flex flex-wrap justify-center gap-6">
-              {FOOTER_LINKS.map((link) => (
-                <a key={link.name} href={link.href} className="text-sm transition-colors hover:text-white">
-                  {link.name}
+          {/* 2. Navigasi - Sekarang Benar-benar Center */}
+         
+        <div className="flex flex-col items-center md:pl-12"> 
+            <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-white/90">Navigasi</h4>
+             <nav className="mt-6 flex flex-wrap justify-center gap-x-8 gap-y-3">
+                {FOOTER_LINKS.map((link) => (
+                <a 
+                    key={link.name} 
+                    href={link.href} 
+                    className="text-sm font-medium transition-all duration-300 hover:text-white hover:translate-y-[-2px]"
+                >
+                    {link.name}
                 </a>
-              ))}
+                ))}
             </nav>
-          </div>
+        </div>
 
-          <div className="flex flex-col items-center md:items-end">
-            <h4 className="text-sm font-semibold uppercase tracking-widest text-white">Media Sosial</h4>
+          {/* 3. Media Sosial - Tetap di kanan pada desktop */}
+          <div className="flex flex-col items-center md:items-end text-center md:text-right">
+            <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-white/90">Media Sosial</h4>
             <div className="mt-6 flex gap-4">
               {SOCIALS.map((social, idx) => (
                 <a
@@ -58,24 +69,29 @@ export function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex size-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.02] transition-all hover:border-white/20 hover:bg-white/10 hover:text-white"
+                  className="group flex size-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.02] transition-all duration-500 hover:border-white/40 hover:bg-white/10 hover:text-white"
                   aria-label={social.label}
                 >
-                  <social.icon className="size-5" />
+                  <social.icon className="size-5 transition-transform duration-300 group-hover:scale-110" />
                 </a>
               ))}
             </div>
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col items-center justify-between border-t border-white/[0.05] pt-8 sm:flex-row">
-          <p className="text-xs">
-            © {new Date().getFullYear()} Riki Studio. Built with Next.js & Tailwind CSS.
+        {/* Bottom Bar */}
+        <div className="mt-16 flex flex-col items-center justify-between border-t border-white/[0.05] pt-8 sm:flex-row gap-6">
+          <p className="text-[11px] uppercase tracking-widest text-zinc-600">
+            © {new Date().getFullYear()} Riki Studio. Built with Next.js & Tailwind.
           </p>
-          <button onClick={scrollToTop} className="group mt-4 flex items-center gap-2 text-xs transition-colors hover:text-white sm:mt-0">
+          
+          <button 
+            onClick={scrollToTop} 
+            className="group flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-zinc-500 transition-colors hover:text-white"
+          >
             Back to top
-            <div className="flex size-7 items-center justify-center rounded-full border border-white/10 transition-transform group-hover:-translate-y-1">
-              <ArrowUp className="size-3" />
+            <div className="flex size-8 items-center justify-center rounded-full border border-white/10 transition-all duration-300 group-hover:border-white/40 group-hover:bg-white/5">
+              <ArrowUp className="size-3 transition-transform duration-300 group-hover:-translate-y-1" />
             </div>
           </button>
         </div>
