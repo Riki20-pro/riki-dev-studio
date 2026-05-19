@@ -12,9 +12,9 @@ const PROJECTS = [
   {
     title: "POS Coffee Shop",
     category: "POS System",
-    status: "Completed",
+    status: "Internal",
     description:
-      "Sistem POS modern untuk coffee shop dengan dashboard kasir, manajemen produk, transaksi, dan laporan penjualan.",
+      "Sistem POS untuk coffee shop yang sudah digunakan oleh klien secara internal. Fitur mencakup kasir, manajemen produk, transaksi, dan laporan penjualan.",
     image: "/projects/pos-coffee.png",
     tech: ["Next.js", "Tailwind CSS", "MySQL"],
     liveUrl: "#",
@@ -23,9 +23,9 @@ const PROJECTS = [
   {
     title: "TFlow Manufacturing",
     category: "Company Profile & Management",
-    status: "In Development",
+    status: "Private Client",
     description:
-      "Website manufaktur pengolahan limbah tulang ikan dan tulang ayam menjadi pakan ikan dengan dashboard modern dan company profile.",
+      "Website company profile dan manajemen untuk TFlow Manufacturing yang sudah dipakai klien, tetapi tidak tersedia untuk akses publik.",
     image: "/projects/tflow.png",
     tech: ["Next.js", "Tailwind CSS", "Framer Motion"],
     liveUrl: "#",
@@ -34,12 +34,23 @@ const PROJECTS = [
   {
     title: "Website Perumahan",
     category: "Real Estate Website",
-    status: "Completed",
+    status: "Prototype",
     description:
-      "Website modern untuk promosi dan informasi perumahan dengan tampilan clean, responsive, dan premium.",
+      "Website perumahan yang dibuat secara lokal untuk pengembangan dan presentasi fitur, belum dipublikasikan.",
     image: "/projects/perumahan.png",
     tech: ["Next.js", "Tailwind CSS", "Shadcn UI"],
     liveUrl: "#",
+    githubUrl: "#",
+  },
+  {
+    title: "CV Sinar Fajar One Sheet",
+    category: "Landing Page Usaha",
+    status: "Live",
+    description:
+      "Landing page publik untuk CV Sinar Fajar yang mempromosikan jasa pemasangan dan maintenance one sheet dengan garansi 3 bulan dan konsultasi WhatsApp.",
+    image: "/projects/sinar-fajar.png",
+    tech: ["Next.js", "Tailwind CSS", "Framer Motion"],
+    liveUrl: "https://sinar-fajar-71h3.vercel.app/",
     githubUrl: "#",
   },
 ] as const;
@@ -100,7 +111,7 @@ function TechBadge({ label }: { label: string }) {
     <span
       className={cn(
         "rounded-full border border-white/10 bg-white/[0.04]",
-        "px-3 py-1 text-xs font-medium text-zinc-300"
+        "px-3 py-1 text-xs font-medium text-zinc-300",
       )}
     >
       {label}
@@ -138,14 +149,14 @@ function ProjectCard({
         "bg-white/[0.03] backdrop-blur-xl",
         "transition-all duration-500",
         "hover:border-white/[0.16]",
-        "hover:shadow-[0_0_60px_rgba(255,255,255,0.08)]"
+        "hover:shadow-[0_0_60px_rgba(255,255,255,0.08)]",
       )}
     >
       <div
         className={cn(
           "pointer-events-none absolute -inset-px rounded-3xl opacity-0",
           "bg-gradient-to-b from-white/[0.08] via-transparent to-transparent",
-          "transition-opacity duration-500 group-hover:opacity-100"
+          "transition-opacity duration-500 group-hover:opacity-100",
         )}
         aria-hidden
       />
@@ -158,14 +169,14 @@ function ProjectCard({
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className={cn(
             "object-cover transition-transform duration-700 ease-out",
-            "group-hover:scale-[1.05]"
+            "group-hover:scale-[1.05]",
           )}
         />
 
         <div
           className={cn(
             "absolute inset-0 bg-gradient-to-t",
-            "from-black/70 via-black/10 to-transparent"
+            "from-black/70 via-black/10 to-transparent",
           )}
           aria-hidden
         />
@@ -176,7 +187,7 @@ function ProjectCard({
             "rounded-xl border border-white/10 bg-black/50",
             "text-white backdrop-blur-md",
             "opacity-0 transition-all duration-300",
-            "translate-y-1 group-hover:translate-y-0 group-hover:opacity-100"
+            "translate-y-1 group-hover:translate-y-0 group-hover:opacity-100",
           )}
         >
           <ArrowUpRight className="size-4" />
@@ -189,7 +200,7 @@ function ProjectCard({
             className={cn(
               "rounded-full border border-white/10 bg-white/[0.04]",
               "px-3 py-1 text-[11px] font-medium uppercase tracking-wider",
-              "text-zinc-300"
+              "text-zinc-300",
             )}
           >
             {category}
@@ -200,7 +211,7 @@ function ProjectCard({
               "rounded-full border px-2.5 py-1 text-[11px] font-medium",
               status === "Completed"
                 ? "border-emerald-500/20 bg-emerald-500/10 text-emerald-400"
-                : "border-amber-500/20 bg-amber-500/10 text-amber-400"
+                : "border-amber-500/20 bg-amber-500/10 text-amber-400",
             )}
           >
             {status}
@@ -221,35 +232,58 @@ function ProjectCard({
           ))}
         </div>
 
-        <div className="mt-6 flex flex-col gap-2 sm:flex-row">
-          <Button
-            asChild
-            className={cn(
-              "h-10 flex-1 rounded-xl bg-white text-sm font-medium text-black",
-              "transition-all duration-300 hover:bg-white/90"
-            )}
-          >
-            <Link href={liveUrl} target="_blank" rel="noopener noreferrer">
-              <ExternalLink className="size-4" />
-              Live Demo
-            </Link>
-          </Button>
+        <div className="mt-6">
+          {(liveUrl !== "#" || githubUrl !== "#") && (
+            <div className="flex flex-col gap-2 sm:flex-row">
+              {liveUrl !== "#" ? (
+                <Button
+                  asChild
+                  className={cn(
+                    "h-10 flex-1 rounded-xl bg-white text-sm font-medium text-black",
+                    "transition-all duration-300 hover:bg-white/90",
+                  )}
+                >
+                  <Link
+                    href={liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <ExternalLink className="size-4" />
+                    Live Demo
+                  </Link>
+                </Button>
+              ) : null}
 
-          <Button
-            asChild
-            variant="outline"
-            className={cn(
-              "h-10 flex-1 rounded-xl border-white/15 bg-transparent",
-              "text-sm font-medium text-white",
-              "transition-all duration-300",
-              "hover:border-white/25 hover:bg-white/5"
-            )}
-          >
-            <Link href={githubUrl} target="_blank" rel="noopener noreferrer">
-              <GitHubIcon className="size-4" />
-              GitHub
-            </Link>
-          </Button>
+              {githubUrl !== "#" ? (
+                <Button
+                  asChild
+                  variant="outline"
+                  className={cn(
+                    "h-10 flex-1 rounded-xl border-white/15 bg-transparent",
+                    "text-sm font-medium text-white",
+                    "transition-all duration-300",
+                    "hover:border-white/25 hover:bg-white/5",
+                  )}
+                >
+                  <Link
+                    href={githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <GitHubIcon className="size-4" />
+                    GitHub
+                  </Link>
+                </Button>
+              ) : null}
+            </div>
+          )}
+
+          {liveUrl === "#" && githubUrl === "#" ? (
+            <p className="mt-3 text-sm text-zinc-400">
+              Demo dan kode hanya tersedia atas permintaan karena aksesnya tidak
+              publik.
+            </p>
+          ) : null}
         </div>
       </div>
     </motion.article>
