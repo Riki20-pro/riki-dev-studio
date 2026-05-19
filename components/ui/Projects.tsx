@@ -209,7 +209,7 @@ function ProjectCard({
           <span
             className={cn(
               "rounded-full border px-2.5 py-1 text-[11px] font-medium",
-              status === "Completed"
+              status === "Live"
                 ? "border-emerald-500/20 bg-emerald-500/10 text-emerald-400"
                 : "border-amber-500/20 bg-amber-500/10 text-amber-400",
             )}
@@ -233,9 +233,9 @@ function ProjectCard({
         </div>
 
         <div className="mt-6">
-          {(liveUrl !== "#" || githubUrl !== "#") && (
+          {liveUrl !== "#" || githubUrl !== "#" ? (
             <div className="flex flex-col gap-2 sm:flex-row">
-              {liveUrl !== "#" ? (
+              {liveUrl !== "#" && (
                 <Button
                   asChild
                   className={cn(
@@ -252,9 +252,9 @@ function ProjectCard({
                     Live Demo
                   </Link>
                 </Button>
-              ) : null}
+              )}
 
-              {githubUrl !== "#" ? (
+              {githubUrl !== "#" && (
                 <Button
                   asChild
                   variant="outline"
@@ -274,16 +274,14 @@ function ProjectCard({
                     GitHub
                   </Link>
                 </Button>
-              ) : null}
+              )}
             </div>
-          )}
-
-          {liveUrl === "#" && githubUrl === "#" ? (
-            <p className="mt-3 text-sm text-zinc-400">
-              Demo dan kode hanya tersedia atas permintaan karena aksesnya tidak
+          ) : (
+            <p className="mt-3 text-xs leading-relaxed text-zinc-500">
+              Demo dan kode hanya tersedia atas permintaan karena akses tidak
               publik.
             </p>
-          ) : null}
+          )}
         </div>
       </div>
     </motion.article>
