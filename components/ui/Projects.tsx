@@ -1,12 +1,14 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, type Variants } from "framer-motion";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
 import { ArrowUpRight, ExternalLink } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { ImageModal } from "./ImageModal";
 
 const PROJECTS = [
   {
@@ -16,7 +18,7 @@ const PROJECTS = [
     description:
       "Sistem POS untuk coffee shop yang sudah digunakan oleh klien secara internal. Fitur mencakup kasir, manajemen produk, transaksi, dan laporan penjualan.",
     image: "/projects/pos-coffee.png",
-    tech: ["Next.js", "Tailwind CSS", "MySQL"],
+    tech: ["PHP Native", "Tailwind CSS", "MySQL"],
     liveUrl: "#",
     githubUrl: "#",
   },
@@ -27,7 +29,7 @@ const PROJECTS = [
     description:
       "Website company profile dan manajemen untuk TFlow Manufacturing yang sudah dipakai klien, tetapi tidak tersedia untuk akses publik.",
     image: "/projects/tflow.png",
-    tech: ["Next.js", "Tailwind CSS", "Framer Motion"],
+    tech: ["Laravel", "Tailwind CSS", "MySQL"],
     liveUrl: "#",
     githubUrl: "#",
   },
@@ -38,7 +40,7 @@ const PROJECTS = [
     description:
       "Website perumahan yang dibuat secara lokal untuk pengembangan dan presentasi fitur, belum dipublikasikan.",
     image: "/projects/perumahan.png",
-    tech: ["Next.js", "Tailwind CSS", "Shadcn UI"],
+    tech: ["PHP Native", "Tailwind CSS", "MySQL"],
     liveUrl: "#",
     githubUrl: "#",
   },
@@ -49,8 +51,33 @@ const PROJECTS = [
     description:
       "Landing page publik untuk CV Sinar Fajar yang mempromosikan jasa pemasangan dan maintenance one sheet dengan garansi 3 bulan dan konsultasi WhatsApp.",
     image: "/projects/sinar-fajar.png",
-    tech: ["Next.js", "Tailwind CSS", "Framer Motion"],
+    tech: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Supabase",
+      "Shadcn UI",
+      "Framer Motion",
+    ],
     liveUrl: "https://sinar-fajar-71h3.vercel.app/",
+    githubUrl: "#",
+  },
+  {
+    title: "Financeus",
+    category: "Aplikasi Web Internal",
+    status: "Production (Internal)",
+    description:
+      "Aplikasi Web manajemen keuangan internal berbasis multi-user yang digunakan untuk pencatatan transaksi real-time, transparansi saldo antar anggota tim, serta pembatasan hak akses demi keamanan data.",
+    image: "/projects/financeus.png",
+    tech: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Supabase",
+      "Shadcn UI",
+      "Framer Motion",
+    ],
+    liveUrl: "https://financeus-pro.vercel.app/",
     githubUrl: "#",
   },
 ] as const;
@@ -121,6 +148,7 @@ function TechBadge({ label }: { label: string }) {
 
 type ProjectCardProps = (typeof PROJECTS)[number] & {
   index: number;
+  onImageClick: (image: string, title: string) => void;
 };
 
 function ProjectCard({
@@ -133,6 +161,7 @@ function ProjectCard({
   liveUrl,
   githubUrl,
   index,
+  onImageClick,
 }: ProjectCardProps) {
   return (
     <motion.article
@@ -161,7 +190,10 @@ function ProjectCard({
         aria-hidden
       />
 
-      <div className="relative aspect-[16/10] overflow-hidden border-b border-white/[0.06]">
+      <div
+        className="relative aspect-[16/10] cursor-zoom-in overflow-hidden border-b border-white/[0.06]"
+        onClick={() => onImageClick(image, title)}
+      >
         <Image
           src={image}
           alt={title}
@@ -289,6 +321,11 @@ function ProjectCard({
 }
 
 export function Projects() {
+  const [selectedImage, setSelectedImage] = useState<{
+    src: string;
+    alt: string;
+  } | null>(null);
+
   return (
     <section
       id="projects"
@@ -332,10 +369,32 @@ export function Projects() {
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
           {PROJECTS.map((project, index) => (
-            <ProjectCard key={project.title} {...project} index={index} />
+            <ProjectCard
+              key={project.title}
+              {...project}
+              index={index}
+              onImageClick={(src, alt) => setSelectedImage({ src, alt })}
+            />
           ))}
         </div>
       </motion.div>
+
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <ImageModal
+              src={selectedImage.src}
+              alt={selectedImage.alt}
+              onClose={() => setSelectedImage(null)}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

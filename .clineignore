@@ -1,0 +1,32 @@
+# Abaikan folder build Next.js (sangat besar, Cline tidak perlu baca ini)
+
+.next/
+out/
+build/
+
+# Abaikan folder pustaka/dependencies (isinya jutaan baris kode library)
+
+node_modules/
+
+# Abaikan file environment rahasia (biar Cline tidak membaca/mengubah token database)
+
+.env
+.env.local
+.env.production
+.env.development
+
+# Abaikan file rahasia Git dan konfigurasi IDE
+
+.git/
+.vscode/
+.github/
+
+# Abaikan file dokumentasi internal AI lainnya (jika ada)
+
+CLAUDE.md
+AGENTS.md
+
+# Abaikan file gambar portofolio (karena isinya biner, Cline tidak bisa baca gambar)
+
+public/images/
+public/projects/
