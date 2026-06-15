@@ -24,7 +24,8 @@ const SERVICES: ServiceItem[] = [
   {
     icon: Globe,
     title: "Web Development",
-    description: "Website modern, responsif, dan performa tinggi menggunakan teknologi mutakhir.",
+    description:
+      "Website modern, responsif, dan performa tinggi menggunakan teknologi mutakhir.",
     features: [
       "Fullstack Next.js / Laravel",
       "PHP Native & MySQL Support",
@@ -35,7 +36,8 @@ const SERVICES: ServiceItem[] = [
   {
     icon: Smartphone,
     title: "Mobile App Development",
-    description: "Aplikasi Android dan iOS yang intuitif dengan performa tinggi dan lancar.",
+    description:
+      "Aplikasi Android dan iOS yang intuitif dengan performa tinggi dan lancar.",
     features: [
       "Cross-Platform Android & iOS",
       "Smooth UI Animation",
@@ -46,7 +48,8 @@ const SERVICES: ServiceItem[] = [
   {
     icon: Palette,
     title: "UI/UX Design",
-    description: "Desain antarmuka yang elegan dan pengalaman pengguna yang mulus serta interaktif.",
+    description:
+      "Desain antarmuka yang elegan dan pengalaman pengguna yang mulus serta interaktif.",
     features: [
       "Figma Wireframing & Prototyping",
       "Modern Typography & Brand Identity",
@@ -57,7 +60,8 @@ const SERVICES: ServiceItem[] = [
   {
     icon: Megaphone,
     title: "Digital Marketing & SEO",
-    description: "Strategi pemasaran digital dan optimasi mesin pencari untuk melejitkan traffic serta penjualan bisnis Anda.",
+    description:
+      "Strategi pemasaran digital dan optimasi mesin pencari untuk melejitkan traffic serta penjualan bisnis Anda.",
     features: [
       "Advanced Google & Meta Ads",
       "Full-Suite SEO (On-Page & Technical)",
@@ -68,7 +72,8 @@ const SERVICES: ServiceItem[] = [
   {
     icon: ShieldCheck,
     title: "Maintenance & Security",
-    description: "Layanan perawatan berkala dan proteksi ketat untuk menjaga sistem tetap prima.",
+    description:
+      "Layanan perawatan berkala dan proteksi ketat untuk menjaga sistem tetap prima.",
     features: [
       "Daily Cloud Backup & Recovery",
       "Real-time Uptime Monitoring",
@@ -79,7 +84,8 @@ const SERVICES: ServiceItem[] = [
   {
     icon: RefreshCcw,
     title: "System Integration",
-    description: "Integrasi dan otomatisasi sistem yang efisien untuk memangkas proses operasional.",
+    description:
+      "Integrasi dan otomatisasi sistem yang efisien untuk memangkas proses operasional.",
     features: [
       "Workflow Automation (n8n Expert)",
       "Third-party API Integration",
@@ -155,3 +161,8 @@ export default function Services() {
               </motion.div>
             );
           })}
+        </div>
+      </div>
+    </section>
+  );
+}
