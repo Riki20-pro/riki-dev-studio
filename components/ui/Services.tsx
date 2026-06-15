@@ -2,36 +2,90 @@
 
 import { motion } from "framer-motion";
 import {
+  Check,
   Globe,
   LayoutDashboard,
   Palette,
   Wrench,
+  Smartphone,
+  Megaphone,
+  ShieldCheck,
+  RefreshCcw,
 } from "lucide-react";
 
-const SERVICES = [
+interface ServiceItem {
+  icon: React.ElementType;
+  title: string;
+  description: string;
+  features: string[];
+}
+
+const SERVICES: ServiceItem[] = [
   {
     icon: Globe,
-    title: "Website Development",
-    description:
-      "Membangun website modern, responsive, dan scalable untuk bisnis, company profile, maupun personal branding.",
+    title: "Web Development",
+    description: "Website modern, responsif, dan performa tinggi menggunakan teknologi mutakhir.",
+    features: [
+      "Fullstack Next.js / Laravel",
+      "PHP Native & MySQL Support",
+      "Supabase & API Integration",
+      "High Performance & Responsive",
+    ],
   },
   {
-    icon: LayoutDashboard,
-    title: "Dashboard & POS System",
-    description:
-      "Membuat dashboard management dan sistem POS modern untuk operasional bisnis yang lebih efisien.",
+    icon: Smartphone,
+    title: "Mobile App Development",
+    description: "Aplikasi Android dan iOS yang intuitif dengan performa tinggi dan lancar.",
+    features: [
+      "Cross-Platform Android & iOS",
+      "Smooth UI Animation",
+      "Secure API Integration",
+      "App Store Optimization (ASO)",
+    ],
   },
   {
     icon: Palette,
     title: "UI/UX Design",
-    description:
-      "Mendesain interface modern dengan fokus pada user experience, visual hierarchy, dan clean aesthetics.",
+    description: "Desain antarmuka yang elegan dan pengalaman pengguna yang mulus serta interaktif.",
+    features: [
+      "Figma Wireframing & Prototyping",
+      "Modern Typography & Brand Identity",
+      "User-Centric Design System",
+      "Interactive Micro-interactions",
+    ],
   },
   {
-    icon: Wrench,
-    title: "Website Maintenance",
-    description:
-      "Maintenance, optimasi performa, dan pengembangan fitur website agar tetap aman dan berjalan optimal.",
+    icon: Megaphone,
+    title: "Digital Marketing & SEO",
+    description: "Strategi pemasaran digital dan optimasi mesin pencari untuk melejitkan traffic serta penjualan bisnis Anda.",
+    features: [
+      "Advanced Google & Meta Ads",
+      "Full-Suite SEO (On-Page & Technical)",
+      "Search Authority (Off-Page) & Local SEO",
+      "High-Conversion Analytics Tracking",
+    ],
+  },
+  {
+    icon: ShieldCheck,
+    title: "Maintenance & Security",
+    description: "Layanan perawatan berkala dan proteksi ketat untuk menjaga sistem tetap prima.",
+    features: [
+      "Daily Cloud Backup & Recovery",
+      "Real-time Uptime Monitoring",
+      "SSL & Vulnerability Protection",
+      "24/7 Bug Fixing & MySQL Optimization",
+    ],
+  },
+  {
+    icon: RefreshCcw,
+    title: "System Integration",
+    description: "Integrasi dan otomatisasi sistem yang efisien untuk memangkas proses operasional.",
+    features: [
+      "Workflow Automation (n8n Expert)",
+      "Third-party API Integration",
+      "Legacy System Migration",
+      "Scalable Cloud Solutions",
+    ],
   },
 ];
 
@@ -62,7 +116,7 @@ export default function Services() {
           </p>
         </motion.div>
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((service, index) => {
             const Icon = service.icon;
 
@@ -89,11 +143,15 @@ export default function Services() {
                 <p className="mt-3 text-sm leading-relaxed text-zinc-400">
                   {service.description}
                 </p>
+
+                <ul className="mt-4 space-y-2 text-sm text-zinc-300">
+                  {service.features.map((feature, i) => (
+                    <li key={i} className="flex items-center gap-2">
+                      <Check className="size-4 text-emerald-400" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
               </motion.div>
             );
           })}
-        </div>
-      </div>
-    </section>
-  );
-}

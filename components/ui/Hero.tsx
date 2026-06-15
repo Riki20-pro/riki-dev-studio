@@ -2,13 +2,7 @@
 
 import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
-import {
-  ArrowRight,
-  Briefcase,
-  Code2,
-  Sparkles,
-  Users,
-} from "lucide-react";
+import { ArrowRight, Briefcase, Code2, Sparkles, Users } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -80,7 +74,7 @@ function FreelanceBadge() {
       className={cn(
         "inline-flex items-center gap-2 rounded-full border border-white/10",
         "bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-zinc-300",
-        "backdrop-blur-sm"
+        "backdrop-blur-sm",
       )}
     >
       <span className="relative flex size-2">
@@ -88,7 +82,7 @@ function FreelanceBadge() {
         <span className="relative inline-flex size-2 rounded-full bg-emerald-400" />
       </span>
       <Sparkles className="size-3.5 text-zinc-400" />
-      Available for Freelance & Collaboration
+      Available for Freelance, Remote & Onsite
     </motion.div>
   );
 }
@@ -106,7 +100,7 @@ function HeroCTAs() {
           "h-11 rounded-full bg-white px-6 text-sm font-medium text-black",
           "transition-all duration-300",
           "hover:bg-white/90 hover:shadow-[0_0_32px_rgba(255,255,255,0.1)]",
-          "active:scale-[0.98]"
+          "active:scale-[0.98]",
         )}
       >
         <Link href="#projects">
@@ -121,12 +115,10 @@ function HeroCTAs() {
         className={cn(
           "h-11 rounded-full border-white/15 bg-transparent px-6 text-sm font-medium text-white",
           "transition-all duration-300",
-          "hover:border-white/25 hover:bg-white/5"
+          "hover:border-white/25 hover:bg-white/5",
         )}
       >
-        <Link href="#contact">
-          Let&apos;s Collaborate
-        </Link>
+        <Link href="#contact">Let&apos;s Collaborate</Link>
       </Button>
     </motion.div>
   );
@@ -149,13 +141,15 @@ function StatCard({ icon: Icon, value, label, index }: StatCardProps) {
       className={cn(
         "group relative overflow-hidden rounded-2xl border border-white/[0.08]",
         "bg-white/[0.03] p-5 backdrop-blur-sm",
-        "transition-colors duration-300 hover:border-white/[0.14] hover:bg-white/[0.05]"
+        "transition-colors duration-300 hover:border-white/[0.14] hover:bg-white/[0.05]",
       )}
     >
       <div className="mb-4 flex size-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-zinc-300 transition-colors duration-300 group-hover:text-white">
         <Icon className="size-5" />
       </div>
-      <p className="text-2xl font-semibold tracking-tight text-white">{value}</p>
+      <p className="text-2xl font-semibold tracking-tight text-white">
+        {value}
+      </p>
       <p className="mt-1 text-sm text-zinc-500">{label}</p>
     </motion.div>
   );
@@ -203,12 +197,16 @@ export function Hero() {
               variants={itemVariants}
               className="mt-6 max-w-2xl text-base leading-relaxed text-zinc-400 sm:text-lg"
             >
-              Saya membantu bisnis dan perusahaan membangun website modern, POS
-              system, dashboard management, dan solusi digital yang responsive,
-              cepat, dan profesional.
+              Saya membantu bisnis, perusahaan, dan tim produk merancang serta
+              mengembangkan aplikasi web modern, sistem POS, dashboard
+              manajemen, hingga infrastruktur digital yang cepat, aman, dan
+              scalable.
             </motion.p>
 
-            <motion.div variants={itemVariants} className="mt-8 w-full sm:w-auto">
+            <motion.div
+              variants={itemVariants}
+              className="mt-8 w-full sm:w-auto"
+            >
               <HeroCTAs />
             </motion.div>
           </div>

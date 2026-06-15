@@ -2,7 +2,9 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Mail, MessageSquare, Music, ArrowRight } from "lucide-react"; 
+import { Mail, MessageSquare, ArrowRight, Github } from "lucide-react";
+
+import { SiGithub } from "react-icons/si";
 import { cn } from "@/lib/utils";
 
 const CONTACT_METHODS = [
@@ -23,22 +25,26 @@ const CONTACT_METHODS = [
     color: "bg-green-500/10 text-green-500",
   },
   {
-    name: "TikTok",
-    value: "@rikiii_20",
-    label: "Follow TikTok",
-    href: "https://www.tiktok.com/@rikiii_20",
-    icon: Music,
+    name: "GitHub",
+    value: "Riki20-pro", // Replace with your professional GitHub username
+    label: "LIHAT REPOSITORI →",
+    href: "https://github.com/Riki20-pro",
+    icon: SiGithub,
     color: "bg-zinc-500/10 text-white",
   },
 ];
 
 export function Contact() {
   return (
-    <section id="contact" className="relative overflow-hidden bg-black px-4 py-20 sm:py-28">
+    <section
+      id="contact"
+      className="relative overflow-hidden bg-black px-4 py-20 sm:py-28"
+    >
       <div className="relative mx-auto max-w-5xl">
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tight text-white sm:text-5xl">
-            Mari bicara tentang <span className="text-zinc-500">projek Anda.</span>
+            Mari bangun sesuatu yang luar biasa{" "}
+            <span className="text-zinc-500">bersama.</span>
           </h2>
         </div>
 
@@ -56,10 +62,17 @@ export function Contact() {
               className="group relative flex flex-col justify-between rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 transition-all hover:bg-white/[0.05] hover:border-white/20"
             >
               <div>
-                <div className={cn("flex size-10 items-center justify-center rounded-lg", method.color)}>
+                <div
+                  className={cn(
+                    "flex size-10 items-center justify-center rounded-lg",
+                    method.color,
+                  )}
+                >
                   <method.icon className="size-5" />
                 </div>
-                <h3 className="mt-4 text-lg font-medium text-white">{method.name}</h3>
+                <h3 className="mt-4 text-lg font-medium text-white">
+                  {method.name}
+                </h3>
                 <p className="mt-1 text-sm text-zinc-500">{method.value}</p>
               </div>
               <div className="mt-8 flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-zinc-400 group-hover:text-white transition-colors">

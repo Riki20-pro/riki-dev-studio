@@ -12,40 +12,49 @@ import {
   Server,
   Users,
   Wind,
+  Building2,
+  Terminal,
+  Network,
+  Cpu,
+  Database,
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
 const SKILLS = [
   {
-    name: "Next.js",
-    description: "Website modern & App Router",
-    icon: Layers,
-  },
-  {
-    name: "React",
-    description: "UI interaktif & dashboard",
+    name: "Next.js & React",
+    description: "UI interaktif, App Router, & optimasi performa aplikasi web.",
     icon: Atom,
   },
   {
-    name: "Tailwind",
-    description: "Desain responsive & cepat",
+    name: "Laravel & PHP",
+    description:
+      "Pengembangan RESTful API kokoh, MVC architecture, & logika bisnis.",
+    icon: Terminal,
+  },
+  {
+    name: "Tailwind CSS",
+    description:
+      "Implementasi desain modern, responsif, & utility-first secara instan.",
     icon: Wind,
   },
   {
-    name: "UI/UX",
-    description: "Antarmuka yang intuitif",
+    name: "Database & Cloud",
+    description: "Manajemen MySQL, arsitektur database, & integrasi Supabase.",
+    icon: Database,
+  },
+  {
+    name: "UI/UX Design",
+    description:
+      "Prototyping interaktif via Figma, wireframing, & Design System.",
     icon: Palette,
   },
   {
-    name: "Backend",
-    description: "API, database & integrasi",
-    icon: Server,
-  },
-  {
-    name: "Laravel",
-    description: "Web apps & RESTful APIs",
-    icon: Layers, // Using Layers icon for now, as no specific Laravel icon is imported.
+    name: "Network & Automation",
+    description:
+      "Infrastruktur MikroTik, deployment jaringan, & otomatisasi workflow.",
+    icon: Network,
   },
 ] as const;
 
@@ -53,6 +62,7 @@ const OPEN_TO = [
   { label: "Freelance Project", icon: Briefcase },
   { label: "Remote Work", icon: Monitor },
   { label: "Collaboration", icon: Users },
+  { label: "Onsite Opportunity", icon: Building2 }, // New badge
 ] as const;
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -142,7 +152,7 @@ function ProfileCard() {
 
         <div className="mt-4 flex items-center justify-center gap-1.5 text-sm text-zinc-500">
           <MapPin className="size-3.5 shrink-0" />
-          <span>Indonesia · Remote</span>
+          <span>Jakarta, Indonesia · Remote / Onsite</span>
         </div>
 
         <div className="mt-6 w-full border-t border-white/[0.06] pt-6 flex flex-col items-center">
@@ -150,9 +160,30 @@ function ProfileCard() {
             Focus
           </p>
           <p className="mt-2 text-sm leading-relaxed text-zinc-400 max-w-[250px]">
-            Website modern · Dashboard management · POS system · Full-stack
-            development
+            Fullstack Dev · POS & Dashboards · Network Infrastructure
           </p>
+          <a
+            href="https://www.linkedin.com/in/riki-siahaan-a242b43ab/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 text-zinc-500 hover:text-blue-500 transition-colors flex items-center gap-2"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="w-5 h-5 transition-colors duration-200 hover:text-blue-500"
+            >
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+              <rect width="4" height="12" x="2" y="9" />
+              <circle cx="4" cy="4" r="2" />
+            </svg>
+            <span className="text-xs">Connect on LinkedIn</span>
+          </a>
         </div>
       </div>
     </motion.div>
@@ -238,7 +269,8 @@ export function About() {
           variants={itemVariants}
           className="mt-3 max-w-2xl text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl"
         >
-          Membangun solusi digital yang scalable
+          Membangun solusi digital yang terintegrasi, responsif, dan siap
+          berkembang.
         </motion.h2>
 
         <div className="mt-12 grid gap-10 lg:grid-cols-[minmax(0,340px)_1fr] lg:gap-16">
@@ -247,20 +279,25 @@ export function About() {
           <div className="flex flex-col gap-10">
             <motion.div variants={itemVariants} className="space-y-4">
               <p className="text-base leading-relaxed text-zinc-400 sm:text-lg">
-                Saya adalah frontend dan full-stack developer yang berfokus
-                membangun website modern, dashboard management system, dan POS
-                system — dari antarmuka yang rapi hingga logika bisnis yang
-                andal.
+                Saya adalah seorang Frontend & Full-Stack Developer yang
+                berdedikasi tinggi dalam mentransformasikan kebutuhan
+                operasional menjadi produk digital yang andal—mulai dari
+                arsitektur backend yang kokoh hingga antarmuka pengguna yang
+                interaktif dan responsif.
               </p>
               <p className="text-base leading-relaxed text-zinc-500 sm:text-lg">
-                Saya berpengalaman mendampingi bisnis, UMKM, dan tim produk
-                dalam menerjemahkan kebutuhan operasional menjadi solusi digital
-                yang responsive, cepat, dan profesional.
+                Berpengalaman dalam merancang dan mengembangkan sistem POS
+                (Point of Sales), manajemen database, hingga landing page bisnis
+                untuk membantu UMKM dan tim produk mencapai efisiensi maksimal.
+                Saya selalu mengedepankan kode yang bersih, performa optimal,
+                dan komunikasi yang transparan.
               </p>
               <p className="text-base leading-relaxed text-zinc-500 sm:text-lg">
-                Selain development, saya percaya pada kolaborasi yang transparan
-                — cocok untuk freelance project, kerja remote, maupun kemitraan
-                jangka panjang dengan tim Anda.
+                Baik Anda pemilik bisnis yang membutuhkan solusi kustom, tim
+                yang sedang mencari rekan kolaborasi, maupun perusahaan yang
+                membutuhkan developer berkomitmen tinggi untuk posisi Remote
+                atau Onsite, saya siap membawa nilai positif ke dalam proyek
+                Anda.
               </p>
             </motion.div>
 

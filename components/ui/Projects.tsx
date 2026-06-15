@@ -1,23 +1,130 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { motion, AnimatePresence, type Variants } from "framer-motion";
-import { ArrowUpRight, ExternalLink } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { motion, AnimatePresence } from "framer-motion";
 import { ImageModal } from "./ImageModal";
+import { ArrowUpRight, ExternalLink } from "lucide-react";
+import {
+  SiNextdotjs,
+  SiTypescript,
+  SiTailwindcss,
+  SiShadcnui,
+  SiSupabase,
+  SiPhp,
+  SiMysql,
+  SiLaravel,
+  SiFramer,
+} from "react-icons/si";
 
-const PROJECTS = [
+interface ProjectMedia {
+  type: "image" | "video";
+  src: string;
+}
+
+interface ProjectType {
+  title: string;
+  category: string;
+  status: string;
+  description: string;
+  media: ProjectMedia[];
+  tech: string[];
+  liveUrl: string;
+  githubUrl: string;
+}
+
+interface TechIcon {
+  icon: React.ReactNode;
+  color: string;
+}
+
+const getTechIcon = (techName: string) => {
+  const name = techName.toLowerCase();
+
+  if (name.includes("next.js") || name.includes("nextjs")) {
+    return {
+      icon: <SiNextdotjs className="size-4 text-white" />,
+      color: "bg-zinc-900 border-zinc-800",
+    };
+  }
+  if (name.includes("typescript") || name.includes("ts")) {
+    return {
+      icon: <SiTypescript className="size-4 text-[#3178C6]" />,
+      color: "bg-[#3178C6]/10 border-[#3178C6]/30",
+    };
+  }
+  if (name.includes("tailwind")) {
+    return {
+      icon: <SiTailwindcss className="size-4 text-[#06B6D4]" />,
+      color: "bg-[#06B6D4]/10 border-[#06B6D4]/30",
+    };
+  }
+  if (name.includes("shadcn")) {
+    return {
+      icon: <SiShadcnui className="size-4 text-white" />,
+      color: "bg-zinc-900 border-zinc-800",
+    };
+  }
+  if (name.includes("supabase")) {
+    return {
+      icon: <SiSupabase className="size-4 text-[#3ECF8E]" />,
+      color: "bg-[#3ECF8E]/10 border-[#3ECF8E]/30",
+    };
+  }
+  if (name.includes("php")) {
+    return {
+      icon: <SiPhp className="size-5 text-[#777BB4]" />,
+      color: "bg-[#777BB4]/10 border-[#777BB4]/30",
+    };
+  }
+  if (name.includes("mysql")) {
+    return {
+      icon: <SiMysql className="size-5 text-[#4479A1]" />,
+      color: "bg-[#4479A1]/10 border-[#4479A1]/30",
+    };
+  }
+  if (name.includes("laravel")) {
+    return {
+      icon: <SiLaravel className="size-4 text-[#FF2D20]" />,
+      color: "bg-[#FF2D20]/10 border-[#FF2D20]/30",
+    };
+  }
+  if (name.includes("framer motion")) {
+    return {
+      icon: <SiFramer className="size-4 text-white" />,
+      color: "bg-zinc-900 border-zinc-800",
+    };
+  }
+
+  // Fallback jika tidak terdaftar
+  return {
+    icon: <span className="text-[10px] font-mono font-bold">Code</span>,
+    color: "bg-zinc-900 border-zinc-800",
+  };
+};
+
+const PROJECTS: ProjectType[] = [
+  {
+    title: "Nasi Liwet Nusantara POS",
+    category: "Mobile POS System & Dashboard",
+    status: "Production (Internal)",
+    description:
+      "Sistem informasi Point of Sales (POS) berbasis mobile untuk bisnis kuliner Nasi Liwet Nusantara. Dilengkapi dengan ringkasan operasional dashboard bisnis, manajemen menu real-time, pencatatan kasir, riwayat transaksi beserta cetak struk pembeli, dan pengaturan profil toko.",
+    media: [
+      { type: "video", src: "/projects/liwet-pos-demo.mp4" },
+      { type: "image", src: "/projects/liwet-pos-mockup.png" },
+    ],
+    tech: ["Next.js", "TypeScript", "Tailwind CSS", "Shadcn UI", "Supabase"],
+    liveUrl: "#",
+    githubUrl: "#",
+  },
   {
     title: "POS Coffee Shop",
     category: "POS System",
     status: "Internal",
     description:
       "Sistem POS untuk coffee shop yang sudah digunakan oleh klien secara internal. Fitur mencakup kasir, manajemen produk, transaksi, dan laporan penjualan.",
-    image: "/projects/pos-coffee.png",
+    media: [{ type: "image", src: "/projects/pos-coffee.png" }],
     tech: ["PHP Native", "Tailwind CSS", "MySQL"],
     liveUrl: "#",
     githubUrl: "#",
@@ -28,7 +135,7 @@ const PROJECTS = [
     status: "Private Client",
     description:
       "Website company profile dan manajemen untuk TFlow Manufacturing yang sudah dipakai klien, tetapi tidak tersedia untuk akses publik.",
-    image: "/projects/tflow.png",
+    media: [{ type: "image", src: "/projects/tflow.png" }],
     tech: ["Laravel", "Tailwind CSS", "MySQL"],
     liveUrl: "#",
     githubUrl: "#",
@@ -39,7 +146,7 @@ const PROJECTS = [
     status: "Prototype",
     description:
       "Website perumahan yang dibuat secara lokal untuk pengembangan dan presentasi fitur, belum dipublikasikan.",
-    image: "/projects/perumahan.png",
+    media: [{ type: "image", src: "/projects/perumahan.png" }],
     tech: ["PHP Native", "Tailwind CSS", "MySQL"],
     liveUrl: "#",
     githubUrl: "#",
@@ -50,7 +157,10 @@ const PROJECTS = [
     status: "Live",
     description:
       "Landing page publik untuk CV Sinar Fajar yang mempromosikan jasa pemasangan dan maintenance one sheet dengan garansi 3 bulan dan konsultasi WhatsApp.",
-    image: "/projects/sinar-fajar.png",
+    media: [
+      { type: "image", src: "/projects/sinar-fajar.png" },
+      { type: "image", src: "/projects/sinar-fajar-project.png" },
+    ],
     tech: [
       "Next.js",
       "TypeScript",
@@ -59,7 +169,7 @@ const PROJECTS = [
       "Shadcn UI",
       "Framer Motion",
     ],
-    liveUrl: "https://sinar-fajar-71h3.vercel.app/",
+    liveUrl: "#",
     githubUrl: "#",
   },
   {
@@ -68,7 +178,7 @@ const PROJECTS = [
     status: "Production (Internal)",
     description:
       "Aplikasi Web manajemen keuangan internal berbasis multi-user yang digunakan untuk pencatatan transaksi real-time, transparansi saldo antar anggota tim, serta pembatasan hak akses demi keamanan data.",
-    image: "/projects/financeus.png",
+    media: [{ type: "image", src: "/projects/financeus.png" }],
     tech: [
       "Next.js",
       "TypeScript",
@@ -77,322 +187,148 @@ const PROJECTS = [
       "Shadcn UI",
       "Framer Motion",
     ],
-    liveUrl: "https://financeus-pro.vercel.app/",
+    liveUrl: "#",
     githubUrl: "#",
   },
-] as const;
-
-const EASE = [0.22, 1, 0.36, 1] as const;
-
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.05,
-    },
-  },
-};
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.55,
-      ease: EASE,
-    },
-  },
-};
-
-const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 28 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: EASE,
-      delay: 0.15 + i * 0.1,
-    },
-  }),
-};
-
-function GitHubIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden
-    >
-      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
-    </svg>
-  );
-}
-
-function TechBadge({ label }: { label: string }) {
-  return (
-    <span
-      className={cn(
-        "rounded-full border border-white/10 bg-white/[0.04]",
-        "px-3 py-1 text-xs font-medium text-zinc-300",
-      )}
-    >
-      {label}
-    </span>
-  );
-}
-
-type ProjectCardProps = (typeof PROJECTS)[number] & {
-  index: number;
-  onImageClick: (image: string, title: string) => void;
-};
-
-function ProjectCard({
-  title,
-  category,
-  status,
-  description,
-  image,
-  tech,
-  liveUrl,
-  githubUrl,
-  index,
-  onImageClick,
-}: ProjectCardProps) {
-  return (
-    <motion.article
-      custom={index}
-      variants={cardVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-48px" }}
-      whileHover={{ y: -6 }}
-      transition={{ duration: 0.35, ease: EASE }}
-      className={cn(
-        "group relative flex flex-col overflow-hidden rounded-3xl",
-        "border border-white/[0.08]",
-        "bg-white/[0.03] backdrop-blur-xl",
-        "transition-all duration-500",
-        "hover:border-white/[0.16]",
-        "hover:shadow-[0_0_60px_rgba(255,255,255,0.08)]",
-      )}
-    >
-      <div
-        className={cn(
-          "pointer-events-none absolute -inset-px rounded-3xl opacity-0",
-          "bg-gradient-to-b from-white/[0.08] via-transparent to-transparent",
-          "transition-opacity duration-500 group-hover:opacity-100",
-        )}
-        aria-hidden
-      />
-
-      <div
-        className="relative aspect-[16/10] cursor-zoom-in overflow-hidden border-b border-white/[0.06]"
-        onClick={() => onImageClick(image, title)}
-      >
-        <Image
-          src={image}
-          alt={title}
-          fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className={cn(
-            "object-cover transition-transform duration-700 ease-out",
-            "group-hover:scale-[1.05]",
-          )}
-        />
-
-        <div
-          className={cn(
-            "absolute inset-0 bg-gradient-to-t",
-            "from-black/70 via-black/10 to-transparent",
-          )}
-          aria-hidden
-        />
-
-        <div
-          className={cn(
-            "absolute right-4 top-4 flex size-9 items-center justify-center",
-            "rounded-xl border border-white/10 bg-black/50",
-            "text-white backdrop-blur-md",
-            "opacity-0 transition-all duration-300",
-            "translate-y-1 group-hover:translate-y-0 group-hover:opacity-100",
-          )}
-        >
-          <ArrowUpRight className="size-4" />
-        </div>
-      </div>
-
-      <div className="relative flex flex-1 flex-col p-6">
-        <div className="mb-4 flex items-center justify-between gap-3">
-          <span
-            className={cn(
-              "rounded-full border border-white/10 bg-white/[0.04]",
-              "px-3 py-1 text-[11px] font-medium uppercase tracking-wider",
-              "text-zinc-300",
-            )}
-          >
-            {category}
-          </span>
-
-          <span
-            className={cn(
-              "rounded-full border px-2.5 py-1 text-[11px] font-medium",
-              status === "Live"
-                ? "border-emerald-500/20 bg-emerald-500/10 text-emerald-400"
-                : "border-amber-500/20 bg-amber-500/10 text-amber-400",
-            )}
-          >
-            {status}
-          </span>
-        </div>
-
-        <h3 className="text-xl font-semibold leading-tight tracking-tight text-white">
-          {title}
-        </h3>
-
-        <p className="mt-3 flex-1 text-sm leading-relaxed text-zinc-400">
-          {description}
-        </p>
-
-        <div className="mt-5 flex flex-wrap gap-2">
-          {tech.map((item) => (
-            <TechBadge key={item} label={item} />
-          ))}
-        </div>
-
-        <div className="mt-6">
-          {liveUrl !== "#" || githubUrl !== "#" ? (
-            <div className="flex flex-col gap-2 sm:flex-row">
-              {liveUrl !== "#" && (
-                <Button
-                  asChild
-                  className={cn(
-                    "h-10 flex-1 rounded-xl bg-white text-sm font-medium text-black",
-                    "transition-all duration-300 hover:bg-white/90",
-                  )}
-                >
-                  <Link
-                    href={liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <ExternalLink className="size-4" />
-                    Live Demo
-                  </Link>
-                </Button>
-              )}
-
-              {githubUrl !== "#" && (
-                <Button
-                  asChild
-                  variant="outline"
-                  className={cn(
-                    "h-10 flex-1 rounded-xl border-white/15 bg-transparent",
-                    "text-sm font-medium text-white",
-                    "transition-all duration-300",
-                    "hover:border-white/25 hover:bg-white/5",
-                  )}
-                >
-                  <Link
-                    href={githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <GitHubIcon className="size-4" />
-                    GitHub
-                  </Link>
-                </Button>
-              )}
-            </div>
-          ) : (
-            <p className="mt-3 text-xs leading-relaxed text-zinc-500">
-              Demo dan kode hanya tersedia atas permintaan karena akses tidak
-              publik.
-            </p>
-          )}
-        </div>
-      </div>
-    </motion.article>
-  );
-}
+];
 
 export function Projects() {
-  const [selectedImage, setSelectedImage] = useState<{
-    src: string;
-    alt: string;
+  const [selectedMedia, setSelectedMedia] = useState<{
+    media: ProjectMedia[];
+    title: string;
+    initialIndex: number;
   } | null>(null);
 
   return (
-    <section
-      id="projects"
-      className="relative overflow-hidden bg-black px-4 py-20 sm:px-6 sm:py-28 lg:px-8"
-    >
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
-        <div className="absolute left-1/4 top-0 size-[400px] -translate-x-1/2 rounded-full bg-violet-600/6 blur-[120px]" />
-        <div className="absolute bottom-0 right-0 size-[320px] rounded-full bg-blue-600/6 blur-[100px]" />
-      </div>
+    <section id="projects" className="py-20 bg-black text-white">
+      <div className="container mx-auto px-4">
+        <div className="mb-12">
+          <span className="text-xs uppercase tracking-widest text-zinc-500">
+            Selected Projects
+          </span>
+          <h2 className="text-4xl font-bold mt-2 font-serif text-zinc-100">
+            Real projects built for business, operations, and modern digital
+            experiences.
+          </h2>
+          <p className="text-zinc-400 mt-4 max-w-2xl">
+            A collection of selected work ranging from POS systems and company
+            profile platforms to modern business websites — focused on
+            performance, scalability, and premium user experience.
+          </p>
+        </div>
 
-      <motion.div
-        className="relative mx-auto max-w-6xl"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-80px" }}
-      >
-        <motion.p
-          variants={itemVariants}
-          className="text-sm font-medium uppercase tracking-[0.2em] text-zinc-500"
-        >
-          Selected Projects
-        </motion.p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {PROJECTS.map((project, idx) => (
+            <div
+              key={idx}
+              className="bg-zinc-900/50 border border-zinc-800 rounded-2xl p-6 flex flex-col justify-between hover:border-zinc-700 transition-all duration-300"
+            >
+              <div>
+                {/* Media Preview Box */}
+                <div
+                  className="relative aspect-video w-full rounded-xl overflow-hidden mb-6 bg-zinc-950 cursor-pointer group"
+                  onClick={() =>
+                    setSelectedMedia({
+                      media: project.media,
+                      title: project.title,
+                      initialIndex: 0,
+                    })
+                  }
+                >
+                  {project.media[0].type === "video" ? (
+                    <video
+                      src={project.media[0].src}
+                      muted
+                      loop
+                      autoPlay
+                      playsInline
+                      className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
+                    />
+                  ) : (
+                    <div className="relative w-full h-full">
+                      <Image
+                        src={project.media[0].src}
+                        alt={project.title}
+                        fill
+                        className="object-contain p-2 group-hover:scale-102 transition-transform duration-500"
+                      />
+                    </div>
+                  )}
 
-        <motion.h2
-          variants={itemVariants}
-          className="mt-3 max-w-3xl text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl"
-        >
-          Real projects built for business, operations, and modern digital
-          experiences.
-        </motion.h2>
+                  {/* Badge Multi Media */}
+                  {project.media.length > 1 && (
+                    <span className="absolute top-3 right-3 bg-blue-600/90 text-white text-xs font-semibold px-2.5 py-1 rounded-full backdrop-blur-sm z-10">
+                      + {project.media.length - 1} Media
+                    </span>
+                  )}
+                </div>
 
-        <motion.p
-          variants={itemVariants}
-          className="mt-5 max-w-2xl text-base leading-relaxed text-zinc-400 sm:text-lg"
-        >
-          A collection of selected work ranging from POS systems and company
-          profile platforms to modern business websites — focused on
-          performance, scalability, and premium user experience.
-        </motion.p>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 bg-zinc-800/50 px-3 py-1 rounded-full border border-zinc-700/50">
+                    {project.category}
+                  </span>
+                  <span
+                    className={`text-xs font-semibold px-2.5 py-0.5 rounded-full border ${
+                      project.status.includes("Production") ||
+                      project.status === "Live"
+                        ? "bg-green-950/50 text-green-400 border-green-800/50"
+                        : "bg-amber-950/50 text-amber-400 border-amber-800/50"
+                    }`}
+                  >
+                    {project.status}
+                  </span>
+                </div>
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-          {PROJECTS.map((project, index) => (
-            <ProjectCard
-              key={project.title}
-              {...project}
-              index={index}
-              onImageClick={(src, alt) => setSelectedImage({ src, alt })}
-            />
+                <h3 className="text-xl font-bold text-zinc-100 font-serif mb-2">
+                  {project.title}
+                </h3>
+                <p className="text-zinc-400 text-sm leading-relaxed mb-6">
+                  {project.description}
+                </p>
+              </div>
+
+              <div>
+                <div className="flex flex-wrap gap-2.5 mb-6">
+                  {project.tech.map((t, i) => {
+                    const { icon, color } = getTechIcon(t);
+                    return (
+                      <div
+                        key={i}
+                        className="group relative flex items-center justify-center"
+                      >
+                        {/* Bulatan Kotak Ikon */}
+                        <div
+                          className={`p-2 rounded-xl border transition-all duration-300 hover:scale-110 shadow-md flex items-center justify-center cursor-help ${color}`}
+                        >
+                          {icon}
+                        </div>
+
+                        {/* Tooltip Informasi */}
+                        <div className="absolute bottom-full mb-2 hidden group-hover:flex flex-col items-center z-30 pointer-events-none animate-in fade-in slide-in-from-bottom-1 duration-200">
+                          <span className="relative z-10 rounded-md bg-zinc-900 border border-zinc-800 px-2.5 py-1 text-xs font-mono text-zinc-200 whitespace-nowrap shadow-xl">
+                            {t}
+                          </span>
+                          {/* Segitiga Kecil di Bawah Tooltip */}
+                          <div className="-mt-1 size-1.5 rotate-45 bg-zinc-900 border-r border-b border-zinc-800"></div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
           ))}
         </div>
-      </motion.div>
+      </div>
 
       <AnimatePresence>
-        {selectedImage && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            <ImageModal
-              src={selectedImage.src}
-              alt={selectedImage.alt}
-              onClose={() => setSelectedImage(null)}
-            />
-          </motion.div>
+        {selectedMedia && (
+          <ImageModal
+            media={selectedMedia.media}
+            title={selectedMedia.title}
+            initialIndex={selectedMedia.initialIndex}
+            onClose={() => setSelectedMedia(null)}
+          />
         )}
       </AnimatePresence>
     </section>
